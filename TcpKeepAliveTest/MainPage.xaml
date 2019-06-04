@@ -1,0 +1,54 @@
+﻿<Page
+    x:Class="TcpKeepAliveTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TcpKeepAliveTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid Margin="12" Name="ControlGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="URL:" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Keep alive time (s):" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Keep alive interval (s):"/>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Text="http://httpstat.us/200?sleep=30000" Name="UrlTextBox"/>
+            <Slider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="300" Value="10" Name="KeepAliveTimeSlider"/>
+            <Slider Grid.Row="2" Grid.Column="1" Minimum="0" Maximum="300" Value="5" Name="KeepAliveIntervalSlider"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="{x:Bind KeepAliveTimeSlider.Value, Mode=OneWay}" />
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Bind KeepAliveIntervalSlider.Value, Mode=OneWay}"/>
+
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Button Grid.Row="0" Grid.Column="1" Content="HttpClient" Click="OnHttpClientClick"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="HttpWebRequest" Click="OnHttpWebRequestClick"/>
+            </Grid>
+        </Grid>
+
+        <ProgressRing Grid.RowSpan="4" Grid.ColumnSpan="3" Visibility="Collapsed" IsActive="False" Name="BusyIndicator" Height="48" Width="48"/>
+    </Grid>
+</Page>
